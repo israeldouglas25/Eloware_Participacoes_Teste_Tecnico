@@ -11,7 +11,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -27,9 +26,7 @@ public class Pessoa {
 	@Column(nullable = false)
 	private LocalDate dataNascimento;
 	@OneToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "pessoa_endereco", 
-				joinColumns = @JoinColumn(name = "pessoa_id"), 
-				inverseJoinColumns = @JoinColumn(name = "endereco_id"))
+	@JoinColumn(name = "pessoa_id")
 	private List<Endereco> endereco;
 
 	public Long getId() {

@@ -4,8 +4,11 @@ import org.springframework.data.annotation.Id;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,16 +24,9 @@ public class Endereco {
 	private String cep;
 	@Column(nullable = false)
 	private int numero;
-
-	public Endereco() {
-	}
-
-	public Endereco(Long id, String logradouro, String cep, int numero) {
-		this.id = id;
-		this.logradouro = logradouro;
-		this.cep = cep;
-		this.numero = numero;
-	}
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "pessoa_id", nullable = false)
+	private Pessoa pessoa;
 
 	public Long getId() {
 		return id;
@@ -62,6 +58,14 @@ public class Endereco {
 
 	public void setNumero(int numero) {
 		this.numero = numero;
+	}
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 
 }
