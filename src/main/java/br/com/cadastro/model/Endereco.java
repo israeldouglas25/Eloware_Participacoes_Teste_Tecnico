@@ -1,13 +1,9 @@
 package br.com.cadastro.model;
 
-import org.springframework.data.annotation.Id;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -15,7 +11,7 @@ import jakarta.persistence.Table;
 @Table(name = "endereco")
 public class Endereco {
 
-	@Id
+	@jakarta.persistence.Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(nullable = false)
@@ -24,9 +20,21 @@ public class Endereco {
 	private String cep;
 	@Column(nullable = false)
 	private int numero;
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "pessoa_id", nullable = false)
+	@Column(nullable = false)
+	private String cidade;
+	@ManyToOne
 	private Pessoa pessoa;
+
+	public Endereco() {
+	}
+
+	public Endereco(Long id, String logradouro, String cep, int numero, String cidade) {
+		this.id = id;
+		this.logradouro = logradouro;
+		this.cep = cep;
+		this.numero = numero;
+		this.cidade = cidade;
+	}
 
 	public Long getId() {
 		return id;
@@ -58,6 +66,14 @@ public class Endereco {
 
 	public void setNumero(int numero) {
 		this.numero = numero;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
 
 	public Pessoa getPessoa() {

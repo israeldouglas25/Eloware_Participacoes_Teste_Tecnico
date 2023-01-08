@@ -1,16 +1,14 @@
 package br.com.cadastro.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.data.annotation.Id;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -18,16 +16,15 @@ import jakarta.persistence.Table;
 @Table(name = "pessoa")
 public class Pessoa {
 
-	@Id
+	@jakarta.persistence.Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(length = 100, nullable = false)
 	private String nome;
 	@Column(nullable = false)
 	private LocalDate dataNascimento;
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "pessoa_id")
-	private List<Endereco> endereco;
+	@OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER)
+	private List<Endereco> endereco = new ArrayList<>();
 
 	public Long getId() {
 		return id;
