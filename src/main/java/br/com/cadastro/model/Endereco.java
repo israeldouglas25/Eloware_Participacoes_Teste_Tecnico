@@ -1,14 +1,14 @@
 package br.com.cadastro.model;
 
+import br.com.cadastro.dto.EnderecoDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "endereco")
+@Entity(name = "endereco")
 public class Endereco {
 
 	@jakarta.persistence.Id
@@ -22,18 +22,20 @@ public class Endereco {
 	private int numero;
 	@Column(nullable = false)
 	private String cidade;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Pessoa pessoa;
+	private boolean isPrincipal;
 
-	public Endereco() {
-	}
-
-	public Endereco(Long id, String logradouro, String cep, int numero, String cidade) {
-		this.id = id;
-		this.logradouro = logradouro;
-		this.cep = cep;
-		this.numero = numero;
-		this.cidade = cidade;
+	public static Endereco of(EnderecoDto enderecoDto) {
+		Endereco endereco = new Endereco();
+		endereco.setId(enderecoDto.getId());
+		endereco.setLogradouro(enderecoDto.getLogradouro());
+		endereco.setCep(enderecoDto.getCep());
+		endereco.setNumero(enderecoDto.getNumero());
+		endereco.setCidade(enderecoDto.getCidade());
+		endereco.setPessoa(enderecoDto.getPessoa());
+		endereco.setPrincipal(enderecoDto.isPrincipal());
+		return endereco;
 	}
 
 	public Long getId() {
@@ -82,6 +84,14 @@ public class Endereco {
 
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
+	}
+
+	public boolean isPrincipal() {
+		return isPrincipal;
+	}
+
+	public void setPrincipal(boolean isPrincipal) {
+		this.isPrincipal = isPrincipal;
 	}
 
 }

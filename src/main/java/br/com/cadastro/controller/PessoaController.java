@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.cadastro.dto.PessoaDto;
 import br.com.cadastro.model.Pessoa;
-import br.com.cadastro.repository.EnderecoRepository;
 import br.com.cadastro.repository.PessoaRepository;
+import br.com.cadastro.service.PessoaService;
 
 @RestController
 @RequestMapping("/pessoa")
@@ -25,7 +26,7 @@ public class PessoaController {
 	private PessoaRepository pessoaRepository;
 
 	@Autowired
-	private EnderecoRepository enderecoRepository;
+	private PessoaService pessoaService;
 
 	@GetMapping
 	public ResponseEntity<List<Pessoa>> findAll() {
@@ -39,9 +40,8 @@ public class PessoaController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Pessoa> insert(@RequestBody Pessoa pessoa) {
-		pessoa.setEndereco(enderecoRepository.saveAll(pessoa.getEndereco()));
-		return ResponseEntity.ok(pessoaRepository.save(pessoa));
+	public ResponseEntity<PessoaDto> insert(@RequestBody Pessoa pessoa) {
+		return ResponseEntity.ok(pessoaService.save(pessoa));
 	}
 
 	@PutMapping("/{id}")

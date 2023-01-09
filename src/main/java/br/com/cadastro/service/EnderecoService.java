@@ -15,6 +15,7 @@ public class EnderecoService {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 
+	@Autowired
 	private PessoaService pessoaService;
 
 	public List<Endereco> findAll() {

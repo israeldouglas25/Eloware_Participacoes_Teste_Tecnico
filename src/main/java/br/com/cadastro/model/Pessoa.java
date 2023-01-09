@@ -1,19 +1,16 @@
 package br.com.cadastro.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
+import br.com.cadastro.dto.PessoaDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "pessoa")
+@Entity(name = "pessoa")
 public class Pessoa {
 
 	@jakarta.persistence.Id
@@ -23,8 +20,18 @@ public class Pessoa {
 	private String nome;
 	@Column(nullable = false)
 	private LocalDate dataNascimento;
-	@OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER)
-	private List<Endereco> endereco = new ArrayList<>();
+	@OneToMany(mappedBy = "pessoa")
+	private List<Endereco> endereco;
+
+	public static Pessoa of(PessoaDto pessoaDto) {
+		Pessoa pessoa = new Pessoa();
+		pessoa.setId(pessoaDto.getId());
+		pessoa.setNome(pessoaDto.getNome());
+		pessoa.setDataNascimento(pessoaDto.getDataNascimento());
+		pessoa.setEndereco(pessoaDto.getEndereco());
+		return pessoa;
+
+	}
 
 	public Long getId() {
 		return id;
