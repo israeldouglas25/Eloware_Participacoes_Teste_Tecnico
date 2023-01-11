@@ -54,5 +54,5 @@ public class PessoaDto {
 	public void setEndereco(List<Endereco> endereco) {
 		this.endereco = endereco;
 	}
-
+	
 }

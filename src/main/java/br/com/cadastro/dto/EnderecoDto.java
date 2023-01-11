@@ -83,8 +83,9 @@ public class EnderecoDto {
 	}
 
 	public static EnderecoDto filterEnderecoPrincipal(List<Endereco> enderecos) {
-		EnderecoDto enderecoDto = EnderecoDto.of(enderecos.stream().filter(endereco -> endereco.isPrincipal()).findFirst().get());
-		return enderecoDto;
+		EnderecoDto enderecoDb = EnderecoDto
+				.of(enderecos.stream().filter(endereco -> endereco.isPrincipal()).findFirst().get());
+		return enderecoDb;
 	}
 
 }
