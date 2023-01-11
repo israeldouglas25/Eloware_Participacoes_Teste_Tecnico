@@ -33,6 +33,11 @@ public class EnderecoController {
 		return ResponseEntity.ok(enderecoService.findById(id));
 	}
 
+	@GetMapping("/{id}")
+	public ResponseEntity<List<Endereco>> findAllByPessoa(@PathVariable Long id) {
+		return ResponseEntity.ok(enderecoService.findAllByPessoa(id));
+	}
+
 	@PostMapping
 	public ResponseEntity<Endereco> save(@RequestBody Endereco endereco) {
 		return ResponseEntity.ok(enderecoService.save(endereco));
