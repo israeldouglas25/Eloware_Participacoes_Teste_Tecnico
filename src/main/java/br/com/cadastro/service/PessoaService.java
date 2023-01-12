@@ -1,7 +1,6 @@
 package br.com.cadastro.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,45 +21,42 @@ public class PessoaService {
 
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-	
-	public List<Pessoa> findAll(){
-		return pessoaRepository.findAll();
-	}
-	
-	public Pessoa findById(Long id) {
-		Optional<Pessoa> pessoa = pessoaRepository.findById(id);
-		return pessoa.get();
-	}
-	
-	public Pessoa update(Long id, Pessoa pessoa) {
-		Optional<Pessoa> pessoaDb = pessoaRepository.findById(id);
 
-		pessoaDb.get().setNome(pessoa.getNome());
-		pessoaDb.get().setDataNascimento(pessoa.getDataNascimento());
-		pessoaDb.get().setEndereco(pessoa.getEndereco());
+	public List<PessoaDto> findAll() {
+		return pessoaRepository.findAll()
+				.stream()
+				.map(pessoa -> PessoaDto.of(pessoa))
+				.toList();
+	}
 
-		pessoaRepository.save(pessoaDb.get());
-		return pessoaDb.get();
+	public PessoaDto findById(Long id) {
+		Pessoa pessoa = pessoaRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("User not found."));
+		return PessoaDto.of(pessoa);
+	}
+
+	public PessoaDto update(Long id, Pessoa pessoa) {
+		Pessoa pessoaDb = pessoaRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("User not found."));
+
+		pessoaDb.setNome(pessoa.getNome());
+		pessoaDb.setDataNascimento(pessoa.getDataNascimento());
+		pessoaDb.setEndereco(pessoa.getEndereco());
+
+		pessoaRepository.save(pessoaDb);
+		return PessoaDto.of(pessoaDb);
 	}
 
 	@Transactional
 	public PessoaDto save(Pessoa pessoa) {
-//		Salva primeiro o endereco para ter ID
 		Pessoa saved = pessoaRepository.save(pessoa);
-
-//		Seta o ID da pessoa salva dentro dos enderecos do objeto pessoa(com enderecos)
 		pessoa.getEndereco().forEach(endereco -> endereco.setPessoa(saved));
-
-//		Salva os enderecos
+		
 		List<Endereco> enderecos = enderecoRepository.saveAll(pessoa.getEndereco());
 
-//		Filtra e traz apenas o endereço principal
 		EnderecoDto enderecoPrincipal = EnderecoDto.filterEnderecoPrincipal(enderecos);
 
-//		Cria DTO de retorno a partir do objeto pessoa (sem enderecos) que foi salvo
 		PessoaDto pessoaDto = PessoaDto.of(saved);
-
-//		Seta o endereco principal no objeto de retorno
 		pessoaDto.setEndereco(List.of(enderecoPrincipal));
 
 		return pessoaDto;

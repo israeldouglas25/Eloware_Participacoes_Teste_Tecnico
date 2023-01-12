@@ -24,22 +24,22 @@ public class PessoaController {
 	private PessoaService pessoaService;
 
 	@GetMapping
-	public ResponseEntity<List<Pessoa>> findAll() {
+	public ResponseEntity<List<PessoaDto>> findAll() {
 		return ResponseEntity.ok(pessoaService.findAll());
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Pessoa> findById(@PathVariable Long id) {
+	public ResponseEntity<PessoaDto> findById(@PathVariable Long id) {
 		return ResponseEntity.ok(pessoaService.findById(id));
 	}
 
 	@PostMapping
-	public ResponseEntity<PessoaDto> insert(@RequestBody Pessoa pessoa) {
-		return ResponseEntity.ok(pessoaService.save(pessoa));
+	public ResponseEntity<PessoaDto> insert(@RequestBody PessoaDto pessoaDto) {
+		return ResponseEntity.ok(pessoaService.save(Pessoa.of(pessoaDto)));
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Pessoa> update(@PathVariable Long id, @RequestBody Pessoa pessoa) {
+	public ResponseEntity<PessoaDto> update(@PathVariable Long id, @RequestBody Pessoa pessoa) {
 		return ResponseEntity.ok(pessoaService.update(id, pessoa));
 	}
 

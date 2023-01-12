@@ -28,9 +28,8 @@ public class Pessoa {
 		pessoa.setId(pessoaDto.getId());
 		pessoa.setNome(pessoaDto.getNome());
 		pessoa.setDataNascimento(pessoaDto.getDataNascimento());
-		pessoa.setEndereco(pessoaDto.getEndereco());
+		pessoa.setEndereco(pessoaDto.getEndereco().stream().map(endereco -> Endereco.of(endereco)).toList());
 		return pessoa;
-
 	}
 
 	public Long getId() {

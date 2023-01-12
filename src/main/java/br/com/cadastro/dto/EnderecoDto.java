@@ -83,8 +83,11 @@ public class EnderecoDto {
 	}
 
 	public static EnderecoDto filterEnderecoPrincipal(List<Endereco> enderecos) {
-		EnderecoDto enderecoDb = EnderecoDto
-				.of(enderecos.stream().filter(endereco -> endereco.isPrincipal()).findFirst().get());
+		EnderecoDto enderecoDb = EnderecoDto.of(enderecos
+				.stream()
+				.filter(endereco -> endereco.isPrincipal())
+				.findFirst()
+				.orElseThrow(() -> new RuntimeException("Addres main not found!")));
 		return enderecoDb;
 	}
 

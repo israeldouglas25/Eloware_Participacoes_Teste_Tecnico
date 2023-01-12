@@ -1,11 +1,11 @@
 package br.com.cadastro.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.cadastro.dto.EnderecoDto;
 import br.com.cadastro.model.Endereco;
 import br.com.cadastro.model.Pessoa;
 import br.com.cadastro.repository.EnderecoRepository;
@@ -19,35 +19,43 @@ public class EnderecoService {
 	@Autowired
 	private PessoaService pessoaService;
 
-	public List<Endereco> findAll() {
-		return enderecoRepository.findAll();
+	public List<EnderecoDto> findAll() {
+		return enderecoRepository.findAll()
+				.stream()
+				.map(endereco -> EnderecoDto.of(endereco))
+				.toList();
 	}
 
-	public Endereco save(Endereco endereco) {
-		return enderecoRepository.save(endereco);
+	public EnderecoDto save(Endereco endereco) {
+		return EnderecoDto.of(enderecoRepository.save(endereco))
+;	}
+
+	public List<EnderecoDto> findAllByPessoa(Long id) {
+		Pessoa pessoa = Pessoa.of(pessoaService.findById(id));
+		return enderecoRepository.findEnderecoByPessoa(pessoa)
+				.stream()
+				.map(endereco -> EnderecoDto.of(endereco))
+				.toList();
 	}
 
-	public List<Endereco> findAllByPessoa(Long id) {
-		Pessoa pessoa = pessoaService.findById(id);
-		return enderecoRepository.findEnderecoByPessoa(pessoa);
+	public EnderecoDto findById(Long id) {
+		Endereco endereco = enderecoRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Address not found."));
+		return EnderecoDto.of(endereco);
 	}
 
-	public Endereco findById(Long id) {
-		Optional<Endereco> endereco = enderecoRepository.findById(id);
-		return endereco.get();
-	}
+	public EnderecoDto update(Long id, Endereco endereco) {
+		Endereco enderecoDb = enderecoRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Address not found."));
 
-	public Endereco update(Long id, Endereco endereco) {
-		Optional<Endereco> enderecoDb = enderecoRepository.findById(id);
+		enderecoDb.setLogradouro(endereco.getLogradouro());
+		enderecoDb.setNumero(endereco.getNumero());
+		enderecoDb.setCep(endereco.getCep());
+		enderecoDb.setCidade(endereco.getCidade());
+		enderecoDb.setPrincipal(endereco.isPrincipal());
 
-		enderecoDb.get().setLogradouro(endereco.getLogradouro());
-		enderecoDb.get().setNumero(endereco.getNumero());
-		enderecoDb.get().setCep(endereco.getCep());
-		enderecoDb.get().setCidade(endereco.getCidade());
-		enderecoDb.get().setPrincipal(endereco.isPrincipal());
-
-		enderecoRepository.save(enderecoDb.get());
-		return enderecoDb.get();
+		enderecoRepository.save(enderecoDb);
+		return EnderecoDto.of(enderecoDb);
 	}
 
 	public void delete(Long id) {

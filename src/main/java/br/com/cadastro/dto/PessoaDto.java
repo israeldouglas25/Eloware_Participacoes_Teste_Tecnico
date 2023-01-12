@@ -3,7 +3,6 @@ package br.com.cadastro.dto;
 import java.time.LocalDate;
 import java.util.List;
 
-import br.com.cadastro.model.Endereco;
 import br.com.cadastro.model.Pessoa;
 
 public class PessoaDto {
@@ -11,14 +10,14 @@ public class PessoaDto {
 	private Long id;
 	private String nome;
 	private LocalDate dataNascimento;
-	private List<Endereco> endereco;
+	private List<EnderecoDto> endereco;
 
 	public static PessoaDto of(Pessoa pessoa) {
 		PessoaDto pessoaDto = new PessoaDto();
 		pessoaDto.setId(pessoa.getId());
 		pessoaDto.setNome(pessoa.getNome());
 		pessoaDto.setDataNascimento(pessoa.getDataNascimento());
-		pessoaDto.setEndereco(pessoa.getEndereco());
+		pessoaDto.setEndereco(pessoa.getEndereco().stream().map(endereco -> EnderecoDto.of(endereco)).toList());
 		return pessoaDto;
 
 	}
@@ -47,12 +46,12 @@ public class PessoaDto {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public List<Endereco> getEndereco() {
+	public List<EnderecoDto> getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(List<Endereco> endereco) {
+	public void setEndereco(List<EnderecoDto> endereco) {
 		this.endereco = endereco;
 	}
-	
+
 }
