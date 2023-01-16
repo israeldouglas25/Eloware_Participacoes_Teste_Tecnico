@@ -4,7 +4,11 @@ import java.util.List;
 
 import br.com.cadastro.model.Endereco;
 import br.com.cadastro.model.Pessoa;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class EnderecoDto {
 	private Long id;
 	private String logradouro;
@@ -24,62 +28,6 @@ public class EnderecoDto {
 		enderecoDto.setPessoa(endereco.getPessoa());
 		enderecoDto.setPrincipal(endereco.isPrincipal());
 		return enderecoDto;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getLogradouro() {
-		return logradouro;
-	}
-
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-
-	public int getNumero() {
-		return numero;
-	}
-
-	public void setNumero(int numero) {
-		this.numero = numero;
-	}
-
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
-
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
-
-	public boolean isPrincipal() {
-		return isPrincipal;
-	}
-
-	public void setPrincipal(boolean isPrincipal) {
-		this.isPrincipal = isPrincipal;
 	}
 
 	public static EnderecoDto filterEnderecoPrincipal(List<Endereco> enderecos) {

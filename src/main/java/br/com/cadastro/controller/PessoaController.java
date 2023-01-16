@@ -17,7 +17,7 @@ import br.com.cadastro.model.Pessoa;
 import br.com.cadastro.service.PessoaService;
 
 @RestController
-@RequestMapping("/pessoa")
+@RequestMapping("/pessoas")
 public class PessoaController {
 
 	@Autowired

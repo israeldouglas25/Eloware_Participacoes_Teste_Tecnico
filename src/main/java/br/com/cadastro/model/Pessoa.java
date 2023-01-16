@@ -9,7 +9,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.OneToMany;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity(name = "pessoa")
 public class Pessoa {
 
@@ -30,38 +34,6 @@ public class Pessoa {
 		pessoa.setDataNascimento(pessoaDto.getDataNascimento());
 		pessoa.setEndereco(pessoaDto.getEndereco().stream().map(endereco -> Endereco.of(endereco)).toList());
 		return pessoa;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-
-	public List<Endereco> getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(List<Endereco> endereco) {
-		this.endereco = endereco;
 	}
 
 }

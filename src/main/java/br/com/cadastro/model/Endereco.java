@@ -7,7 +7,11 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity(name = "endereco")
 public class Endereco {
 
@@ -37,61 +41,4 @@ public class Endereco {
 		endereco.setPrincipal(enderecoDto.isPrincipal());
 		return endereco;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getLogradouro() {
-		return logradouro;
-	}
-
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-
-	public int getNumero() {
-		return numero;
-	}
-
-	public void setNumero(int numero) {
-		this.numero = numero;
-	}
-
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
-
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
-
-	public boolean isPrincipal() {
-		return isPrincipal;
-	}
-
-	public void setPrincipal(boolean isPrincipal) {
-		this.isPrincipal = isPrincipal;
-	}
-
 }

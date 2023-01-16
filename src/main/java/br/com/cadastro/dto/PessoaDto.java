@@ -4,7 +4,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 import br.com.cadastro.model.Pessoa;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class PessoaDto {
 
 	private Long id;
@@ -21,37 +25,4 @@ public class PessoaDto {
 		return pessoaDto;
 
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-
-	public List<EnderecoDto> getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(List<EnderecoDto> endereco) {
-		this.endereco = endereco;
-	}
-
 }

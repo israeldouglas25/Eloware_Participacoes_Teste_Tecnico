@@ -18,7 +18,7 @@ import br.com.cadastro.model.Endereco;
 import br.com.cadastro.service.EnderecoService;
 
 @RestController
-@RequestMapping("/endereco")
+@RequestMapping("/enderecos")
 public class EnderecoController {
 
 	@Autowired
@@ -34,10 +34,10 @@ public class EnderecoController {
 		return ResponseEntity.ok(enderecoService.findById(id));
 	}
 
-//	@GetMapping("/{id}")
-//	public ResponseEntity<List<EnderecoDto>> findAllByPessoa(@PathVariable Long id) {
-//		return ResponseEntity.ok(enderecoService.findAllByPessoa(id));
-//	}
+	@GetMapping("/listar/{id}")
+	public ResponseEntity<List<EnderecoDto>> findAllByPessoa(@PathVariable Long id) {
+		return ResponseEntity.ok(enderecoService.findAllByPessoa(id));
+	}
 
 	@PostMapping
 	public ResponseEntity<EnderecoDto> save(@RequestBody Endereco endereco) {
