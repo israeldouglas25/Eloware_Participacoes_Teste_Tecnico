@@ -34,19 +34,19 @@ public class EnderecoController {
 		return ResponseEntity.ok(enderecoService.findById(id));
 	}
 
-	@GetMapping("/listar/{id}")
+	@GetMapping("/pessoa/{id}")
 	public ResponseEntity<List<EnderecoDto>> findAllByPessoa(@PathVariable Long id) {
 		return ResponseEntity.ok(enderecoService.findAllByPessoa(id));
 	}
 
 	@PostMapping
-	public ResponseEntity<EnderecoDto> save(@RequestBody Endereco endereco) {
-		return ResponseEntity.ok(enderecoService.save(endereco));
+	public ResponseEntity<EnderecoDto> save(@RequestBody EnderecoDto enderecoDto) {
+		return ResponseEntity.ok(enderecoService.save(Endereco.of(enderecoDto)));
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<EnderecoDto> update(@PathVariable Long id, @RequestBody Endereco endereco) {
-		return ResponseEntity.ok(enderecoService.update(id, endereco));
+	public ResponseEntity<EnderecoDto> update(@PathVariable Long id, @RequestBody EnderecoDto enderecoDto) {
+		return ResponseEntity.ok(enderecoService.update(id, Endereco.of(enderecoDto)));
 	}
 
 	@DeleteMapping("/{id}")

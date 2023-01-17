@@ -41,7 +41,6 @@ public class PessoaService {
 
 		pessoaDb.setNome(pessoa.getNome());
 		pessoaDb.setDataNascimento(pessoa.getDataNascimento());
-		pessoaDb.setEndereco(pessoa.getEndereco());
 
 		pessoaRepository.save(pessoaDb);
 		return PessoaDto.of(pessoaDb);
