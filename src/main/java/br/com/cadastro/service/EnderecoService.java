@@ -52,7 +52,7 @@ public class EnderecoService {
 		enderecoDb.setNumero(endereco.getNumero());
 		enderecoDb.setCep(endereco.getCep());
 		enderecoDb.setCidade(endereco.getCidade());
-		enderecoDb.setPrincipal(endereco.isPrincipal());
+		enderecoDb.setIsPrincipal(endereco.getIsPrincipal());
 
 		enderecoRepository.save(enderecoDb);
 		return EnderecoDto.of(enderecoDb);

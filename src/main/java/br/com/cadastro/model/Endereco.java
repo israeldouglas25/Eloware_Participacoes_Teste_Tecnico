@@ -28,7 +28,8 @@ public class Endereco {
 	private String cidade;
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Pessoa pessoa;
-	private boolean isPrincipal;
+	@Column(nullable = false)
+	private Boolean isPrincipal;
 
 	public static Endereco of(EnderecoDto enderecoDto) {
 		Endereco endereco = new Endereco();
@@ -37,8 +38,7 @@ public class Endereco {
 		endereco.setCep(enderecoDto.getCep());
 		endereco.setNumero(enderecoDto.getNumero());
 		endereco.setCidade(enderecoDto.getCidade());
-		endereco.setPessoa(enderecoDto.getPessoa());
-		endereco.setPrincipal(enderecoDto.isPrincipal());
+		endereco.setIsPrincipal(enderecoDto.getIsPrincipal());
 		return endereco;
 	}
 }

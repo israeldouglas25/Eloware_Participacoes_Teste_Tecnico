@@ -39,8 +39,8 @@ public class PessoaController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<PessoaDto> update(@PathVariable Long id, @RequestBody Pessoa pessoa) {
-		return ResponseEntity.ok(pessoaService.update(id, pessoa));
+	public ResponseEntity<PessoaDto> update(@PathVariable Long id, @RequestBody PessoaDto pessoaDto) {
+		return ResponseEntity.ok(pessoaService.update(id, Pessoa.of(pessoaDto)));
 	}
 
 }
