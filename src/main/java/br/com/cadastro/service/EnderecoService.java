@@ -22,7 +22,7 @@ public class EnderecoService {
 	public List<EnderecoDto> findAll() {
 		return enderecoRepository.findAll()
 				.stream()
-				.map(endereco -> EnderecoDto.of(endereco))
+				.map(EnderecoDto::of)
 				.toList();
 	}
 
@@ -34,7 +34,7 @@ public class EnderecoService {
 		Pessoa pessoa = Pessoa.of(pessoaService.findById(id));
 		return enderecoRepository.findEnderecoByPessoa(pessoa)
 				.stream()
-				.map(endereco -> EnderecoDto.of(endereco))
+				.map(EnderecoDto::of)
 				.toList();
 	}
 

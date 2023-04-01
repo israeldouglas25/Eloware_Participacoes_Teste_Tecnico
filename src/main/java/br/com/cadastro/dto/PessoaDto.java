@@ -21,7 +21,7 @@ public class PessoaDto {
 		pessoaDto.setId(pessoa.getId());
 		pessoaDto.setNome(pessoa.getNome());
 		pessoaDto.setDataNascimento(pessoa.getDataNascimento());
-		pessoaDto.setEndereco(pessoa.getEndereco().stream().map(endereco -> EnderecoDto.of(endereco)).toList());
+		pessoaDto.setEndereco(pessoa.getEndereco().stream().map(EnderecoDto::of).toList());
 		return pessoaDto;
 
 	}

@@ -25,7 +25,7 @@ public class PessoaService {
 	public List<PessoaDto> findAll() {
 		return pessoaRepository.findAll()
 				.stream()
-				.map(pessoa -> PessoaDto.of(pessoa))
+				.map(PessoaDto::of)
 				.toList();
 	}
 

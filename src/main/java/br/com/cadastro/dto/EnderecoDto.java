@@ -30,7 +30,7 @@ public class EnderecoDto {
 	public static EnderecoDto filterEnderecoPrincipal(List<Endereco> enderecos) {
 		EnderecoDto enderecoDb = EnderecoDto.of(enderecos
 				.stream()
-				.filter(endereco -> endereco.getIsPrincipal())
+				.filter(Endereco::getIsPrincipal)
 				.findFirst()
 				.orElseThrow(() -> new RuntimeException("Principal addres not found!")));
 		return enderecoDb;
