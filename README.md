@@ -1,7 +1,27 @@
-# Eloware_Participacoes_Teste_Tecnico
-API para cadastro de pessoa com uma lista de endereço
+# Teste Técnico Back End - Attornatus
 
-1.	Durante a implementação de uma nova funcionalidade de software solicitada, quais critérios você avalia e implementa para garantia de qualidade de software?
- - R- Um codigo bem distribuido com suas classes de serciço e controle, alem de utitlizar de artificios para retornar o endereço principal dentro de uma lista.
-2.	Em qual etapa da implementação você considera a qualidade de software?
- - R- Na etapa de servico e controller onde cada class tem seu papel especifico para resolução das ações.
+💎 Usando Spring boot, crie uma API simples para gerenciar Pessoas.
+
+## 🛑 Pré-Requisitos
+✅ Conhecer a sintaxe da Java <br />
+✅ Java JDK 17 ou mais <br />
+✅ IDE para desenvolvimento Java <br />
+✅ Lombok <br />
+✅ Postman <br />
+✅ Banco de dados H2 <br />
+
+## 👣 Passo-a-Passo
+1. Criar uma pessoa
+2. Editar uma pessoa
+3. Consultar uma pessoa
+4. Listar pessoas
+5. Criar endereço para pessoa
+6. Listar endereços da pessoa
+7. Poder informar qual endereço é o principal da pessoa
+
+### Diferencial
+1. Update endereço
+2. Deletar endereço
+
+## 👏 Conclusão
+Desafio desenvolvido com proposito de demonstrar as habilidades em desenvolvimento Java com Spring. 
